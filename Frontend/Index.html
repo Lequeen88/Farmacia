@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body, html {
+      height: 100%;
+    }
+    .bg {
+      background-image: url('https://wallpaperset.com/w/full/f/6/7/142016.jpg');
+      background-size: cover;
+      background-position: center;
+      height: 100%;
+    }
+    .card {
+      width: 100%;
+      max-width: 400px;
+    }
+    .hide {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="bg d-flex justify-content-center align-items-center">
+    <div class="card container" id="loginCard">
+      <div class="card-header text-center">
+        <h4>Iniciar Sesión</h4>
+      </div>
+      <div class="card-body">
+        <form>
+          <div class="form-group">
+            <label for="txtCorreoLogin">Correo Electrónico</label>
+            <input type="email" class="form-control" id="txtCorreoLogin" placeholder="Introduce tu correo" value="demo@example.com">
+          </div>
+          <div class="form-group">
+            <label for="txtPasswordLogin">Contraseña</label>
+            <input type="password" class="form-control" id="txtPasswordLogin" placeholder="Introduce tu contraseña" value="123456">
+          </div>
+          <button type="button" class="btn btn-primary btn-block" id="btnIniciarSesion">Iniciar Sesión</button>
+        </form>
+      </div>
+      <div class="card-footer text-center">
+        <p>¿Aun no te has registrado? <a href="#" id="btnRegistrarse">Regístrate</a></p>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script>
+
+    const fakeUsers = [
+      { email: "demo@example.com", password: "123456" },
+      { email: "test@example.com", password: "abcdef" },
+      { email: "user@example.com", password: "password" }
+    ];
+
+    const btnIniciarSesion = document.getElementById("btnIniciarSesion"),
+      btnRegistrarse = document.getElementById("btnRegistrarse"),
+      formLogin = document.querySelector("#loginCard");
+
+    formLogin.classList.remove("hide");
+
+    btnRegistrarse.addEventListener("click", e => {
+      formLogin.classList.add("hide");
+      limpiar();
+      setTimeout(() => {
+
+        alert("Redirigiendo al formulario de registro...");
+      }, 10);
+    });
+
+    btnIniciarSesion.addEventListener("click", e => {
+      const email = document.getElementById("txtCorreoLogin").value;
+      const password = document.getElementById("txtPasswordLogin").value;
+      
+      const user = fakeUsers.find(user => user.email === email && user.password === password);
+      
+      if (user) {
+        alert("Inicio de sesión exitoso");
+        window.location.href = "home.html"; // Redirigir al usuario a home.html
+      } else {
+        alert("Correo o contraseña incorrectos");
+      }
+    });
+
+    function limpiar() {
+      let txtCorreoLogin1 = document.getElementById("txtCorreoLogin"),
+        txtPasswordLogin1 = document.getElementById("txtPasswordLogin");
+
+      txtCorreoLogin1.value = '';
+      txtPasswordLogin1.value = '';
+    }
+  </script>
+</body>
+</html>
